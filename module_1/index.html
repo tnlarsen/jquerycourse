@@ -44,33 +44,29 @@
 
  <script>
     $(function() {
-        var chosen = -1;
-        $('.rating-circle').click(function() {
-            $('.rating-circle').removeClass('rating-hover')
-            $(this).prevAll().addClass('rating-chosen')
-            $(this).addClass('rating-chosen')
-            //$(this).attr('id', 'rating')
+        var chosen;
 
-            chosen = $('#rating-container').children().index($(this))
-            console.log(chosen)
+        $('.rating-circle').click(function() {
+          chosen = this;
+          markChosen(this)
         })
 
-        $('.rating-circle').hover(function() {
-            console.log(chosen)
+        function markChosen(chosen) {
+            $('.rating-circle').removeClass('rating-hover')
+            $(chosen).prevAll().addClass('rating-chosen')
+            $(chosen).addClass('rating-chosen')
+        }
+
+        $('.rating-circle').hover(
+          function() {
             $('.rating-circle').removeClass('rating-chosen')
             $(this).prevAll().addClass('rating-hover')
             $(this).addClass('rating-hover')
-        })
-
-        $('.rating-circle').mouseout(function() {
-            console.log(chosen)
-            $(this).prevAll().removeClass('rating-hover')
-            $(this).removeClass('rating-hover')
-        })
-
-        function highlightChosen() {
-            $('#rating-container').children().index($(this))
-        }
+          }, function() {
+              $(this).prevAll().removeClass('rating-hover')
+              $(this).removeClass('rating-hover')
+              markChosen(chosen)
+          })
 
     })
  </script>
