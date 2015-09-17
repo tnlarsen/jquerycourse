@@ -4,11 +4,11 @@
  <style>
   body {
    font-family: Verdana;
-  }
-  h1, h2, h3 {
+ }
+ h1, h2, h3 {
    color: darkblue;
-  }
-  .rating-circle {
+ }
+ .rating-circle {
    height: 2em;
    width: 2em;
    border: .1em solid black;
@@ -16,16 +16,16 @@
    display: inline-block;
    margin: 0;
    padding: .1em;
-  }
+ }
 
-  .rating-hover {
+ .rating-hover {
    background-color: yellow;
-  }
+ }
 
-  .rating-chosen {
+ .rating-chosen {
    background-color: green;
-  }
- </style>
+ }
+</style>
 </head>
 <body>
  <h1>Contoso Web Developer Conference</h1>
@@ -38,37 +38,37 @@
   <div class="rating-circle"></div>
   <div class="rating-circle"></div>
   <div class="rating-circle"></div>
- </div>
+</div>
 
- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 
- <script>
-    $(function() {
-        var chosen;
+<script>
+  $(function() {
+    var chosen;
 
-        $('.rating-circle').click(function() {
-          chosen = this;
-          markChosen(this)
-        })
-
-        function markChosen(chosen) {
-            $('.rating-circle').removeClass('rating-hover')
-            $(chosen).prevAll().addClass('rating-chosen')
-            $(chosen).addClass('rating-chosen')
-        }
-
-        $('.rating-circle').hover(
-          function() {
-            $('.rating-circle').removeClass('rating-chosen')
-            $(this).prevAll().addClass('rating-hover')
-            $(this).addClass('rating-hover')
-          }, function() {
-              $(this).prevAll().removeClass('rating-hover')
-              $(this).removeClass('rating-hover')
-              markChosen(chosen)
-          })
-
+    $('.rating-circle').click(function() {
+      chosen = this;
+      markChosen(this)
     })
- </script>
+
+    function markChosen(chosen) {
+      $('.rating-circle').removeClass('rating-hover')
+      $(chosen).prevAll().addClass('rating-chosen')
+      $(chosen).addClass('rating-chosen')
+    }
+
+    $('.rating-circle').hover(
+      function() {
+        $('.rating-circle').removeClass('rating-chosen')
+        $(this).prevAll().addClass('rating-hover')
+        $(this).addClass('rating-hover')
+      }, 
+      function() {
+        $(this).prevAll().removeClass('rating-hover')
+        $(this).removeClass('rating-hover')
+        markChosen(chosen)
+      })
+  })
+</script>
 </body>
 </html>
