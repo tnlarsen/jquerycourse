@@ -44,6 +44,7 @@ h1, h2, h3 {
 
 <script>
     $(function() {
+    	var superHover;
         var chosen;
 
         $('.rating-circle').click(function() {
@@ -64,10 +65,15 @@ h1, h2, h3 {
 	        $(this).addClass('rating-hover')
         }, 
         function() {
-            $(this).prevAll().removeClass('rating-hover')
-            $(this).removeClass('rating-hover')
-            markChosen(chosen)
+           	$(this).prevAll().removeClass('rating-hover')
+           	$(this).removeClass('rating-hover')
         })
+
+        $('#rating-container').onmouseout(
+	       	function() {
+        		markChosen(chosen)
+        	}
+        )
     })
 </script>
 </body>
