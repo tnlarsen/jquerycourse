@@ -40,10 +40,53 @@
   <button type="button" id="update-max-value">Update max value</button>
 </div>
 
- <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+ <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 
  <script>
-        // your answer would go here
+ 	$(function() {
+ 		$('#update-max-value').click(function() {
+ 			createCircles($('#max-value').val())
+ 		})
+
+		var chosen;
+
+ 		function createCircles(count) {
+ 			$('#rating-container').empty()
+ 			var $newCircle = $('<div class="rating-circle"></div>')
+
+ 			for(var i = 0; i < count;i++) {
+  				$('#rating-container').append($newCircle.clone())
+ 			}
+
+ 		    $('.rating-circle').click(function() {
+          	  	chosen = this;
+            	markChosen(this)
+        	})
+
+        	$('.rating-circle').hover(
+        		function() {
+            		$('.rating-circle').removeClass('rating-chosen')
+	        		$(this).prevAll().addClass('rating-hover')
+	        		$(this).addClass('rating-hover')
+        		}, 
+        		function() {
+           			$(this).prevAll().removeClass('rating-hover')
+           			$(this).removeClass('rating-hover')
+        		})
+ 			}
+
+ 		function markChosen(chosen) {
+            $('.rating-circle').removeClass('rating-hover')
+            $(chosen).prevAll().addClass('rating-chosen')
+            $(chosen).addClass('rating-chosen')
+        }
+
+		$('#rating-container').mouseout(
+	       	function() {
+        		markChosen(chosen)
+        	}
+        )
+      })
  </script>
 </body>
 </html>
