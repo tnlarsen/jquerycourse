@@ -44,11 +44,33 @@
 
  <script>
  	$(function() {
+		var chosen;
+
  		$('#update-max-value').click(function() {
  			createCircles($('#max-value').val())
  		})
 
-		var chosen;
+		$('#rating-container').delegate('.rating-circle', 'mouseover',function() {
+       		$('.rating-circle').removeClass('rating-chosen')
+	        $(this).prevAll().addClass('rating-hover')
+	        $(this).addClass('rating-hover')
+        })
+
+		$('#rating-container').delegate('.rating-circle', 'mouseout',function() {
+			$(this).prevAll().removeClass('rating-hover')
+           	$(this).removeClass('rating-hover')
+   		})
+
+		$('#rating-container').delegate('.rating-circle', 'click',function() {
+			chosen = this;
+            markChosen(this)
+        })
+
+        $('#rating-container').mouseout(
+	       	function() {
+        		markChosen(chosen)
+        	}
+        )
 
  		function createCircles(count) {
  			$('#rating-container').empty()
@@ -57,35 +79,14 @@
  			for(var i = 0; i < count;i++) {
   				$('#rating-container').append($newCircle.clone())
  			}
+ 		}
 
- 		    $('.rating-circle').click(function() {
-          	  	chosen = this;
-            	markChosen(this)
-        	})
-
-        	$('.rating-circle').hover(
-        		function() {
-            		$('.rating-circle').removeClass('rating-chosen')
-	        		$(this).prevAll().addClass('rating-hover')
-	        		$(this).addClass('rating-hover')
-        		}, 
-        		function() {
-           			$(this).prevAll().removeClass('rating-hover')
-           			$(this).removeClass('rating-hover')
-        		})
- 			}
 
  		function markChosen(chosen) {
             $('.rating-circle').removeClass('rating-hover')
             $(chosen).prevAll().addClass('rating-chosen')
             $(chosen).addClass('rating-chosen')
         }
-
-		$('#rating-container').mouseout(
-	       	function() {
-        		markChosen(chosen)
-        	}
-        )
       })
  </script>
 </body>
