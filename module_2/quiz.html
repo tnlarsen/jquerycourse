@@ -1,0 +1,28 @@
+<html>
+<head>
+</head>
+<body>
+<div id="container">
+	<div>
+    <button id="button1">Button One</button>
+</div>
+<div>
+    <button id="button2">Button Two</button>
+</div>
+
+</div>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+
+<script>
+$(function() {
+	$(document).on('click', 'button', function1);
+   function1();
+ });
+ 
+ function function1() {
+	  $('#container').append('<button>Click!</button>');
+ }
+</script>
+</body>
+</html>
