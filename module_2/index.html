@@ -46,6 +46,8 @@
  	$(function() {
 		var chosen;
 
+		createCircles($('#rating-container').attr('max-value'))
+
  		$('#update-max-value').click(function() {
  			createCircles($('#max-value').val())
  		})
@@ -80,7 +82,6 @@
   				$('#rating-container').append($newCircle.clone())
  			}
  		}
-
 
  		function markChosen(chosen) {
             $('.rating-circle').removeClass('rating-hover')
