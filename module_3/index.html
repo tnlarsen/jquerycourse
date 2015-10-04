@@ -49,36 +49,43 @@
  	$(function() {
 		var chosen;
 
+		//Start by creating some initial circles
 		createCircles(getMax());
 
+		//Update the max value and circles when the 'Update max value' button is clicked
  		$('#update-max-value').click(function() {
  			var newMax = $('#max-value').val();
  			$('#rating-container').attr('max-value', newMax)
  			createCircles(newMax)
  		})
 
+ 		//Ensure the corect behaviour on mouseover for current and future circles
 		$('#rating-container').delegate('.rating-circle', 'mouseover',function() {
        		$('.rating-circle').removeClass('rating-chosen')
 	        $(this).prevAll().addClass('rating-hover')
 	        $(this).addClass('rating-hover')
         })
 
+		//Ensure the corect behaviour on mouseout for current and future circles
 		$('#rating-container').delegate('.rating-circle', 'mouseout',function() {
 			$(this).prevAll().removeClass('rating-hover')
            	$(this).removeClass('rating-hover')
    		})
 
+		//Ensure the corect behaviour on click for current and future circles
 		$('#rating-container').delegate('.rating-circle', 'click',function() {
 			chosen = this;
             markChosen(this)
         })
 
+		//Mark the chosen one when not hovering over the container.
         $('#rating-container').mouseout(
 	       	function() {
         		markChosen(chosen)
         	}
         )
 
+        //Creates 'counẗ́' circles
  		function createCircles(count) {
  			$('#rating-container').empty()
  			var $newCircle = $('<div class="rating-circle"></div>')
@@ -88,18 +95,24 @@
  			}
  		}
 
+ 		//Updates the circles to indicate the currently chosen one
  		function markChosen(chosen) {
             $('.rating-circle').removeClass('rating-hover')
             $(chosen).prevAll().addClass('rating-chosen')
             $(chosen).addClass('rating-chosen')
         }
 
+        //Returns the current maximum value
         function getMax() {
         	return $('#rating-container').attr('max-value')
         }
 
+        //Returns the currently selected value
         function getCurrentValue() {
-        	return $('#rating-container').children().index(chosen) + 1;
+        	if(chosen) 
+        		return $('#rating-container').children().index(chosen) + 1;
+        	else 
+        		return 0;
         }
 
         //Save the current/max rating when user clicks 'save rating'
@@ -107,7 +120,7 @@
         	var rating = {value: getCurrentValue(), maxValue: getMax()}
         	$.post('http://jquery-edx.azurewebsites.net/api/Rating',rating)
         	.done(function(response) {
-        			$('#output').text(response.message)
+				$('#output').text(response.message)
         	})
        	})
     })
